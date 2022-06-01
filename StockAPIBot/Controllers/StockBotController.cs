@@ -18,22 +18,33 @@ public class StockBotController : ControllerBase
         _stockReader = stockReader;
         _redisManager = redisManager;
     }
-
-    
-    // GET api/<StockBotController>/5
+    // Get api/<StockBotController>/5
     [HttpGet("{stock_code}")]
-    public async Task<IActionResult> Get(string stock_code)
+    public async Task<IActionResult<string>> Get(string stock_code)
     {
+
         string result = await _stockReader.getStock(stock_code);
 
         bool messagesent = await _redisManager.sendMessage("stockChannel", result);
 
-        if(!messagesent)
-            return StatusCode(500, "Redis Server Not Found");
-        else if (result.Contains("Error"))
-            return BadRequest(result);
-        else 
-            return Ok(result);
+
+        return (IActionResult<string>)Ok(result);
+    }
+
+    // Post api/<StockBotController>/5
+    [HttpPost("{stock_code}")]
+    public IActionResult Post(string stock_code)
+    {
+        Task.Run(() =>
+        {
+
+            string result = _stockReader.getStock(stock_code).Result;
+
+            bool messagesent = _redisManager.sendMessage("stockChannel", result).Result;
+
+        });
+
+        return Ok();
     }
 
 }

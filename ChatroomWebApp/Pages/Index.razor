@@ -54,7 +54,8 @@
     {
         if (hubConnection is not null)
         {
-            await hubConnection.SendAsync("SendMessageGroup", "group1", userInput, messageInput);
+            await hubConnection.SendAsync("SendMessage", userInput, messageInput);
+            messageInput = "";
         }
     }
 
