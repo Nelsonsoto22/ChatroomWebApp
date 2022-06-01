@@ -47,7 +47,7 @@ public class ChatHub : Hub, IChatHub
         var client = new HttpClient();
         HttpContent httpContent = new StringContent(stock_code);
 
-        HttpResponseMessage response = await client.PostAsync(stockURL, httpContent);
+        HttpResponseMessage response = await client.GetAsync(stockURL);
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
 

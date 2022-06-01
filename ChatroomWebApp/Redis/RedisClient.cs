@@ -25,9 +25,9 @@ public class RedisClient
         if (_redis != null)
         {
             var subscriber = _redis.GetSubscriber();
-            subscriber.SubscribeAsync(channel, (redisChannel, message) => {
-                action(message);
-            });
+            //subscriber.SubscribeAsync(channel, (redisChannel, message) => {
+            //    action(message);
+            //});
         }
     }
 }
