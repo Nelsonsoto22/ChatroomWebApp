@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatroomWebApp", "ChatroomWebApp\ChatroomWebApp.csproj", "{F2F1AEB0-9042-4B10-93BD-2005D17EFE63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAPIBot", "StockAPIBot\StockAPIBot.csproj", "{7F511395-16C5-4B38-839B-70554BA5BDFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockAPIBot", "StockAPIBot\StockAPIBot.csproj", "{7F511395-16C5-4B38-839B-70554BA5BDFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAPIBot.Test", "StockAPIBot.Test\StockAPIBot.Test.csproj", "{3A9E4972-711D-4BEA-B741-7B1E1406EBBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7F511395-16C5-4B38-839B-70554BA5BDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F511395-16C5-4B38-839B-70554BA5BDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F511395-16C5-4B38-839B-70554BA5BDFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A9E4972-711D-4BEA-B741-7B1E1406EBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9E4972-711D-4BEA-B741-7B1E1406EBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9E4972-711D-4BEA-B741-7B1E1406EBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9E4972-711D-4BEA-B741-7B1E1406EBBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
