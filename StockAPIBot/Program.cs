@@ -1,3 +1,4 @@
+using StockAPIBot.Redis;
 using StockAPIBot.StockClass;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IStockReader, StockReader>();
+builder.Services.AddSingleton<IRedisManager, RedisManager>();
 
 var app = builder.Build();
 

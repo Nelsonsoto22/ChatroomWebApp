@@ -1,31 +1,39 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using StockAPIBot.Redis;
 using StockAPIBot.StockClass;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace StockAPIBot.Controllers
+namespace StockAPIBot.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class StockBotController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class StockBotController : ControllerBase
+    private IStockReader _stockReader;
+    private IRedisManager _redisManager;
+
+    public StockBotController(IStockReader stockReader, IRedisManager redisManager)
     {
-        private IStockReader _stockReader;
-
-        public StockBotController(IStockReader stockReader)
-        {
-            _stockReader = stockReader;
-        }
-
-        
-        // GET api/<StockBotController>/5
-        [HttpGet("{stock_code}")]
-        public async Task<ActionResult<string>> Get(string stock_code)
-        {
-            string result = await _stockReader.getStock(stock_code);
-            if (result.Contains("Error"))
-                return BadRequest(result);
-            return Ok(result);
-        }
-
+        _stockReader = stockReader;
+        _redisManager = redisManager;
     }
+
+    
+    // GET api/<StockBotController>/5
+    [HttpGet("{stock_code}")]
+    public async Task<IActionResult> Get(string stock_code)
+    {
+        string result = await _stockReader.getStock(stock_code);
+
+        bool messagesent = await _redisManager.sendMessage("stockChannel", result);
+
+        if(!messagesent)
+            return StatusCode(500, "Redis Server Not Found");
+        else if (result.Contains("Error"))
+            return BadRequest(result);
+        else 
+            return Ok(result);
+    }
+
 }
